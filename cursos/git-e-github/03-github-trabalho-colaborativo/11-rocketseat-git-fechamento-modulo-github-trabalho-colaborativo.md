@@ -1,0 +1,34 @@
+# 🏆 Fechamento de Módulo e Teste de Fixação — GitHub e Trabalho Colaborativo
+
+### 1. Resumo Executivo
+Este módulo transforma o GitHub de "onde o código mora na nuvem" em um ambiente real de colaboração. A base é a ligação entre repositório local e remoto via `origin` — o apelido que diz ao Git para onde mandar (`push`) e de onde trazer (`pull`) commits, seja criado automaticamente por um `clone` ou manualmente ao conectar um repositório local a um GitHub vazio. A partir daí, o módulo desconstrói o `pull` em suas duas metades reais — `fetch` (busca o contexto do remoto sem aplicar nada) e `merge` (unifica de fato) — mostrando que entender a mecânica interna evita decisões automáticas em momentos sensíveis, como um conflito.
+
+A segunda metade do módulo desloca o foco de comandos para **processo de equipe**: o Pull Request é o mecanismo central que transforma "eu poderia simplesmente dar merge" em "o código passa por revisão antes de afetar quem usa o projeto". Branch Protection Rules (exigir PR, aprovação de terceiros, Code Scanning automático) são a camada que torna essa regra inegociável, não uma boa intenção. E a aula sobre colaboração real deixa claro que code review não é apontar erro nem impor estilo — é compartilhar contexto do time com quem está entregando, com objetividade e sem tom pessoal. Issues, Projects (Kanban), Fork, README, License e Releases completam o quadro: cada um resolve um problema de **comunicação** diferente — o que precisa ser feito (issue), quem pode contribuir sem acesso direto (fork), o que o projeto é (README), o que se pode fazer com o código (license), e o que de fato chegou ao usuário final (release, via versionamento semântico).
+
+A lição central para o dia a dia: o GitHub não é só um Git com interface bonita — ele institucionaliza disciplina de equipe (revisão obrigatória, histórico limpo de branches, segurança contra vazamento de segredos) que, sem ferramenta, dependeria só de boa vontade individual. Isso importa diretamente para o projeto de portfólio (Frente 6): à medida que ele crescer, branches protegidas e PRs bem descritos vão ser o que mantém o pipeline Bronze→Silver→Gold confiável mesmo quando mais gente (ou IA) mexer nele.
+
+### 2. Glossário Técnico
+- **Origin:** apelido padrão para a URL de um repositório remoto (geralmente no GitHub); é o destino de `push` e a origem de `pull`/`fetch`. Criado automaticamente por `clone` ou manualmente com `git remote add origin [URL]`.
+- **Fetch vs. Pull:** `fetch` busca o estado do remoto e atualiza só o *contexto* do Git local (não aplica nada, não precisa trocar de branch); `pull` = `fetch` + `merge` automático. Fetch isolado permite inspecionar mudanças (`git diff` / `git log` contra `origin/main`) antes de decidir aplicá-las, direto da branch onde você está trabalhando.
+- **Pull Request (PR):** solicitação formal de que um conjunto de mudanças (de uma branch) seja revisado e, se aprovado, mesclado em outra branch (geralmente a `main`). É o mecanismo que impede merge direto e não revisado em produção.
+- **Branch Protection Rules:** regras configuráveis numa branch sensível (ex: exigir PR antes de merge, exigir N aprovações de alguém que não seja o autor, exigir Code Scanning verde) que tornam a revisão uma trava técnica, não uma convenção informal.
+- **Code Review (revisão de código):** avaliação de clareza, aderência a padrões do projeto, possíveis bugs e legibilidade de um PR — nunca preferência pessoal de estilo quando o código já segue os critérios acima. Um achado objetivo de segurança/bug trava o merge; uma preferência de estilo sem bug real não deveria travar.
+- **Fork:** cópia independente de um repositório de outra pessoa para a própria conta, usada para contribuir sem ter acesso de escrita direto ao original. Depois do fork, é preciso clonar (ou editar pela interface web) para alterar o código antes de enviar as mudanças de volta via Pull Request.
+- **Issue:** registro de uma tarefa ou problema do projeto; pode ter labels, assignee e milestone, e pode ser fechada automaticamente ao ser vinculada a um PR que a resolve.
+- **Dependabot / Code Scanning (CodeQL) / Secret Scanning:** trio de automações de segurança do GitHub — o primeiro audita dependências vulneráveis, o segundo analisa o código em busca de padrões como SQL Injection/XSS, o terceiro bloqueia pushes que expõem credenciais.
+- **Release:** versão publicada oficialmente do projeto, normalmente associada a uma tag, seguindo o padrão `MAJOR.MINOR.PATCH` (quebra de compatibilidade / nova funcionalidade sem quebra / correção de bug).
+- **GitHub CLI (`gh`):** ferramenta de linha de comando para operar o GitHub (criar repositório, abrir PR, listar issues) sem depender da interface web — relevante para automação e integração com IA.
+
+### 3. Correção Comentada do Teste de Fixação
+
+**Questão 1 — Correto, mas existe um atalho mais direto.**
+Sua resposta (stash → main → pull → conferir → voltar → stash pop) funciona e é segura: evita que o Git aplique qualquer coisa automaticamente na branch de trabalho. Mas a lição central do módulo (fetch vs. pull) permite um caminho mais curto — você nem precisa sair da sua branch. Rodando `git fetch` direto na `feature/relatorio-vendas`, o Git atualiza o contexto sobre `origin/main` sem tocar em nenhum arquivo seu. Daí você compara com `git diff` ou `git log` contra `origin/main`, decide se traz agora ou só no final — tudo sem stash nem troca de branch. O stash só é necessário quando há alterações **não commitadas** e você precisa mesmo trocar de branch.
+
+**Questão 2 — Correto.**
+Exatamente a distinção que o módulo traz: o achado do CodeQL (SQL Injection em potencial) é uma falha objetiva de segurança e trava o merge — é pra isso que Branch Protection + Code Scanning existem. O comentário do colega ("eu faria diferente", sem bug real apontado) é preferência de estilo e não deveria bloquear, segundo a régua de "o que não revisar em PR". Atualizar o PR corrigindo o CodeQL e levar o comentário do colega como sugestão (não bloqueio) está alinhado com o ensinado.
+
+**Questão 3 — Correto, com um detalhe que faltou.**
+A sequência (checar license → fork → branch de fix/feat → PR → revisão considerando o CodeQL) está certa, inclusive com uma boa síntese extra (conectou License com Fork/PR sem eu pedir explicitamente). Faltou um passo: depois do fork, é preciso **clonar o seu fork** (ou editar direto pela interface do GitHub) para escrever a correção — o fork sozinho só copia o repositório pra sua conta; o código ainda precisa ser alterado antes do push e da abertura do PR.
+
+---
+**Definição de Pronto (DoD): 100%** — 10 aulas resumidas + quiz do módulo (10/10) + quiz avaliativo "Fundamentos do GitHub" (15/15) + teste de fixação corrigido (3/3 respondidas, 2/3 totalmente certas na primeira tentativa, 1/3 certa com atalho mais simples apontado).

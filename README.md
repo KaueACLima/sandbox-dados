@@ -1,64 +1,43 @@
-# 📊 Pipeline de Dados — Projeto de Portfólio
+# 🧪 Sandbox de Estudos — Analista de Dados
 
-Projeto ponta-a-ponta de engenharia/análise de dados, construído aos poucos, alimentado pelas práticas e desafios dos cursos e certificações que estou cursando em paralelo (Google Skills, Rocketseat). Não é um projeto isolado de portfólio "genérico" — cada etapa nasce de uma trilha de estudo real, versionada aqui desde a primeira linha.
+Repositório de prática e exercícios dos cursos que estou fazendo em paralelo, focados em dados: engenharia de dados, análise, Git/GitHub, SQL e cloud (GCP). Aqui fica o "caderno de código" — não é o projeto de portfólio final, é onde a prática de cada curso é versionada conforme avanço.
 
 ## 🎯 Objetivo
 
-Construir um pipeline de dados completo seguindo a **Arquitetura Medallion** (Bronze → Silver → Gold), do zero até um dashboard final, aplicando na prática o que cada frente de estudo ensina:
-
-```
-[Fonte de dado público] -> [Bronze: ingestão bruta] -> [Silver: limpeza/tratamento] -> [Gold: modelagem/agregação] -> [Dashboard/saída]
-```
+Registrar e versionar os exercícios, desafios e labs de cada trilha de estudo, mantendo o histórico de commits como parte do aprendizado (não é código de produção nem uma entrega polida).
 
 ## 🗂️ Estrutura do repositório
 
 ```
-├── 01-primeiros-passos-com-o-git/     # Resumos e prática do módulo introdutório de Git
-├── 02-branches-fluxos-e-conflitos/    # (em andamento)
-├── bronze/                            # Ingestão de dado público, ainda cru
-├── silver/                            # Dados limpos e tratados
-├── gold/                              # Dados modelados/agregados, prontos para análise
+├── cursos/
+│   ├── git-e-github/          # Exercícios do curso Git e GitHub (Rocketseat)
+│   ├── banco-de-dados/        # Exercícios de SQL/PostgreSQL (quando começar)
+│   ├── data-analytics/        # Exercícios da Formação Data Analytics (quando começar)
+│   └── google-skills/         # Labs e desafios dos cursos Google Skills (quando começar)
 └── README.md
 ```
 
-> As pastas `bronze/`, `silver/` e `gold/` nascem conforme o projeto avança — hoje o repositório ainda está na etapa de fundação (Git).
+> Cada pasta nasce conforme a trilha correspondente gera prática — não são criadas todas de uma vez.
 
-## 🚧 Status atual
+## 📚 Trilhas em andamento
 
-| Estágio | Alimentado por | Status |
-|---|---|---|
-| Repo + README + versionamento | Git (módulo "Primeiros passos") | ✅ Concluído |
-| Ingestão de dado público → Bronze | Python/Pandas + Coletando os Dados | ⬜ Não iniciado |
-| Limpeza/transformação → Silver | Tratando os Dados + SQL | ⬜ Não iniciado |
-| Modelagem/agregação → Gold | BigQuery (Data Engineer/ADP) | ⬜ Não iniciado |
-| Dashboard/saída | Looker Studio / Power BI | ⬜ Não iniciado |
-
-## 🛠️ Stack prevista
-
-- **Versionamento:** Git/GitHub
-- **Linguagem:** Python (Pandas, Numpy)
-- **Banco de dados / SQL:** PostgreSQL
-- **Cloud/Data Warehouse:** Google Cloud Platform (BigQuery)
-- **Visualização:** Looker Studio e/ou Power BI
-
-## 📚 Contexto de estudo
-
-Este repositório acompanha minha jornada como Analista de Dados Júnior, estudando em paralelo:
 - Google Skills — Associate Data Practitioner Certification
 - Google Skills — Professional Data Engineer Certification
 - Rocketseat — Formação Data Analytics
 - Rocketseat — Banco de Dados (PostgreSQL)
 - Rocketseat — Git e GitHub
 
-Cada módulo concluído nessas trilhas que gera prática real (lab, desafio, projeto) alimenta uma etapa deste pipeline, em vez de ficar em arquivos soltos.
-
 ## 📝 Convenção de commits
 
 ```
-docs(<curso-abreviado>): resumo aula - [Nome da Aula]
-docs(<curso-abreviado>): fechamento do módulo - [Nome do Módulo]
+docs(<curso-abreviado>): pratica aula - [Nome da Aula]
+docs(<curso-abreviado>): exercicio modulo - [Nome do Módulo]
 ```
+
+## 🔗 Projeto de portfólio
+
+O projeto ponta-a-ponta (pipeline Bronze → Silver → Gold), que é a peça de vitrine, vive em um repositório separado: [`sandbox-dados`](#) *(atualizar link quando o repo novo for criado)*.
 
 ---
 
-*Última atualização: 21/09/2026 — módulo "Primeiros passos com o Git" concluído.*
+*Última atualização: 29/09/2026 — repositório reorganizado como sandbox de estudos.*
