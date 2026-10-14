@@ -36,7 +36,7 @@ docs(<curso-abreviado>): exercicio modulo - [Nome do Módulo]
 
 ## 🔗 Projeto de portfólio
 
-O projeto ponta-a-ponta (pipeline Bronze → Silver → Gold), que é a peça de vitrine, vive em um repositório separado: [`sandbox-dados`](#) *(atualizar link quando o repo novo for criado)*.
+O projeto ponta-a-ponta (pipeline Bronze → Silver → Gold), que é a peça de vitrine, vive em um repositório separado: [`portfolio-engenheiro-dados`](https://github.com/KaueACLima/portfolio-engenheiro-dados).
 
 ---
 
